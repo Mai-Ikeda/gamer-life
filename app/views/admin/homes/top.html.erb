@@ -1,0 +1,59 @@
+<div class="container">
+  <div class="row">
+    <div class="mx-auto">
+      <h3>admin top</h3>
+    </div>
+  </div>
+  
+  <div class="row">
+    <div class="col-10 mx-auto">
+      <p>会員管理</p>
+      <div class="table">
+        <table>
+          <thead>
+            <tr>
+              <th class="col-2">ユーザーネーム</th>
+              <th class="col-2">投稿数</th>
+              <th class="col-2"><%= link_to '一覧へ', admin_customers_path, class: "btn btn-info" %></th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @customers.each do |customer| %>
+            <tr>
+              <td><%= customer.user_name %></td>
+              <td><%= customer.impressions.count %></td>
+              <td><%= link_to "show more", admin_customer_path(customer), class: "btn btn-primary" %></td>
+            </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+      
+      
+      <p>投稿管理</p>
+      <div class="table">
+        <table>
+          <thead>
+            <tr>
+              <th class="col-2">投稿日</th>
+              <th class="col-2">投稿者</th>
+              <th class="col-4">本文</th>
+              <th class="col-2"><%= link_to '一覧へ', admin_impressions_path, class: "btn btn-info" %></th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @impressions.each do |impression| %>
+            <tr>
+              <td><%= impression.created_at.strftime('%Y/%m/%d') %></td>
+              <td><%= impression.customer.user_name %></td>
+              <td><%= impression.body %></td>
+              <td><%= link_to 'show more', admin_impression_path(impression), class: "btn btn-primary" %></td>
+            </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  
+</div>

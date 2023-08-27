@@ -1,0 +1,49 @@
+<div class="container">
+  <div class="row mb-3">
+    <h3>感想編集</h3>
+  </div>
+
+  <div class="row mb-3">
+    <%= form_with model: @impression, local: true do |f| %>
+      <div class="form-group">
+        <%= f.label :"ゲームタイトル" %>
+        <%= f.text_field :title, class: 'form-control impression_title' %>
+      </div>
+      <div class="form-group">
+        <%= f.label :"感想" %>
+        <%= f.text_area :body, class: 'form-control impression_body' %>
+      </div>
+      <div class="form-group">
+        <%= f.label :"ジャンル" %>
+        <%= f.collection_select :genre_id, Genre.all, :id, :name, {promt: "選択してください"}, class: 'form-control impression_genre' %>
+      </div>
+      
+      <div class="form-group" id="star">
+        <%= f.label :rate %>
+        <%= f.hidden_field :rate, id: :review_star, class: 'form-control' %>
+        <div id="post_raty"></div>
+      </div>
+      
+      <script>
+        $(document).on('turbolinks:load', function() {
+          let elem = document.querySelector('#post_raty');
+          if (elem == null) return;
+    
+          elem.innerHTML = ""
+          let opt = {  
+            starOn: "<%= asset_path('star-on.png') %>",
+            starOff: "<%= asset_path('star-off.png') %>",
+            starHalf: "<%= asset_path('star-half.png') %>",
+            score: <%= @impression.rate %>,
+            scoreName: 'impression[rate]',
+          };
+          raty(elem, opt);
+        });
+      </script>
+      
+      <div class="form-group">
+        <%= f.submit '保存する', class: 'btn btn-success' %>
+      </div>
+    <% end %>
+  </div>
+</div>

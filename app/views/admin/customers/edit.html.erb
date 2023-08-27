@@ -1,0 +1,28 @@
+<div class="container">
+  <div class="row">
+    <h3><%= @customer.user_name %>さんの会員情報</h3>
+    <%= form_with model:@customer, url: admin_customer_path(@customer) do |f| %>
+    <div class="table mx-auto">
+      <table>
+        <tbody>
+          <tr>
+            <td>ユーザーネーム</td>
+            <td><%= f.text_field :user_name %></td>
+          </tr>
+          <tr>
+            <td>好きなゲーム</td>
+            <td><%= f.text_field :like_game %></td>
+          </tr>
+          <tr>
+            <td>会員ステータス</td>
+            <td><%= link_to "退会させる", admin_customer_path(@customer), method: :delete, "data-confirm" => "本当に退会させますか？",class: "btn btn-danger" %></td>
+          </tr>
+          <tr>
+            <td><%= f.submit "更新", class: "btn btn-primary" %></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <% end %>
+  </div>
+</div>

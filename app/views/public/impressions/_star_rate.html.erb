@@ -1,0 +1,27 @@
+<% if impression.id.nil? %>
+  <div class="form-group" id="star">
+    <%= f.label :"評価" %>
+    <%= f.hidden_field :rate, id: :review_star, class: 'form-control' %>
+    <div id="post_raty"></div>
+  </div>
+  
+  <script>
+    $(document).on('turbolinks:load', function() {
+      let elem = document.querySelector('#post_raty');
+      if (elem == null) return;
+
+      elem.innerHTML = ""
+      let opt = {
+        starOn: "<%= asset_path('star-on.png') %>",
+        starOff: "<%= asset_path('star-off.png') %>",
+        starHalf: "<%= asset_path('star-half.png') %>",
+        scoreName: 'impression[rate]',
+      };
+      raty(elem, opt);
+     });
+  </script>
+<% else %>
+  <div class="form-group">
+    <%= render "show_rate", impression: impression %>
+  </div>
+<% end %>
