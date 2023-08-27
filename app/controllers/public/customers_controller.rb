@@ -1,4 +1,5 @@
 class Public::CustomersController < ApplicationController
+  before_action :authenticate_customer!, except:[:index]
   
   def index
     @customers = Customer.all.page(params[:page]).per(10)

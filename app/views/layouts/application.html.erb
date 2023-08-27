@@ -58,13 +58,13 @@
               
               <% else %>
               <li class="nav-item mr-1">
+                <%= link_to '感想一覧', impressions_path, class: 'nav-link btn btn-outline-secondary' %>
+              </li>
+              <li class="nav-item mr-1">
                 <%= link_to "新規登録", new_customer_registration_path, class: 'nav-link btn btn-outline-secondary' %>
               </li>
               <li class="nav-item mr-1">
                 <%= link_to "ログイン", new_customer_session_path, class: 'nav-link btn btn-outline-secondary' %>
-              </li>
-              <li class="nav-item mr-1">
-                <%= link_to '感想一覧', impressions_path, class: 'nav-link btn btn-outline-secondary' %>
               </li>
               <% end %>
             </ul>
@@ -91,7 +91,7 @@
             <h6 class="text-white mt-2 mb-3">Link</h6>
             <ul class="p-0 list-unstyled">
               <li>
-                <a href="" title="About" class="text-white-50">概要</a>
+                <%= link_to "概要", about_path, class:"text-white-50" %>
               </li>
               <li>
                 <a href="" title="License informations" class="text-white-50">プライバシーポリシー</a>
