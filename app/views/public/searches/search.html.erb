@@ -1,0 +1,13 @@
+<% if @model == 'customer' %>
+	<h3>Customers search for "<%= @content %>"</h3>
+  <%= render 'public/customers/index', customers: @records %>
+  
+<% elsif @model == 'impression' %>
+	<h3>Impressions search for "<%= @content %>"</h3>
+  <%= render 'public/impressions/index', impressions: @records %>
+  
+<% elsif @model == 'genre' %>
+	<h3>genres search for "<%= @content %>"</h3>
+  <%= render 'public/homes/index', genres: @records %>
+  
+<% end %>

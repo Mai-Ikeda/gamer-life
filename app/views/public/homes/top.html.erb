@@ -1,0 +1,47 @@
+<div class="container">
+  <div class="row">
+    <div class="col-2 offset-1">
+      <div class="sidebar">
+        <h4>ジャンル一覧</h4>
+        <% @genres.each do |genre| %>
+          <%= genre.name %><br>
+        <% end %>
+      </div>
+    </div>
+    
+    <div class="col-8">
+      <div class="mb-5 mx-auto">
+        <h3>Welcome to gamerlife!</h3>
+      </div>
+      
+      <div class="table">
+        <table>
+          <thead>
+            <tr>
+              <th class="col-1">投稿日</th>
+              <th class="col-2">ゲームタイトル</th>
+              <th class="col-2">評価</th>
+              <th class="col-1"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @impressions.each do |impression| %>
+            <tr>
+              <td><%= impression.created_at.strftime('%Y/%m/%d') %></td>
+              <td><%= impression.title %></td>
+              <td><%= render 'star_rate', impression: impression %></td>
+              <td><%= link_to "show more", impression_path(impression.id) %></td>
+            </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+      
+    </div>
+    
+    <div class="col-1">
+      <%= link_to "投稿する",new_impression_path, class:"btn btn-primary" %>
+    </div>
+    
+  </div>
+</div>

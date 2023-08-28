@@ -1,0 +1,70 @@
+<div class="container">
+
+  <div class="row mb-3">
+    <h3>My Page</h3>
+  </div>
+
+  <div class="row mb-3">
+    <div class="table col-5">
+      <table>
+        <tbody>
+          <tr>
+            <td>ユーザーネーム</td>
+            <td><%= @customer.user_name %></td>
+          </tr>
+          <tr>
+            <td>好きなゲーム</td>
+            <td><%= @customer.like_game %></td>
+          </tr>
+          <tr>
+            <td>フォロー数</td>
+            <td><%= link_to @customer.followings.count, customer_followings_path(@customer) %></td>
+          </tr>
+          <tr>
+            <td>フォロワー数</td>
+            <td><%= link_to @customer.followers.count, customer_followers_path(@customer) %></td>
+          </tr>
+        </tbody>
+      </table>
+      <% if @customer.id == current_customer.id %>
+        <%= link_to '編集する', edit_customer_path(@customer.id), class:"btn btn-success" %>
+      <% end %>  
+      <%= render "public/relationships/btn", customer: @customer %>
+    </div>
+  </div>
+  
+  <div class='row'>
+    
+  </div>
+
+  <div class="row mb-3">
+    <h3>投稿履歴</h3>
+  </div>
+
+  <div class="row">
+    <div class="table">
+      <table>
+        <thead>
+          <tr>
+            <th>投稿日</th>
+            <th>タイトル</th>
+            <th></th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @impressions.each do |impression| %>
+          <tr>
+            <td class="col-1"><%= impression.created_at.strftime('%Y/%m/%d') %></td>
+            <td class="col-1"><%= impression.title %></td>
+            <td class="col-1"><%= link_to "Show more",impression_path(impression.id) %></td>
+            <td class="col-2"><%= link_to "#{impression.comments.count} コメント", impression_path(impression.id) %></td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+    <%= paginate @impressions %>
+  </div>
+  
+</div>

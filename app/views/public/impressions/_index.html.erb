@@ -1,0 +1,18 @@
+<table class="table">
+  <thead>
+    <tr>
+      <th>タイトル</th>
+      <th>本文</th>
+      <th>評価</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% impressions.each do |impression| %>
+      <tr>
+        <td><%= link_to impression.title,impression, class: "impression_#{impression.id}" %></td>
+        <td><%= impression.body %></td>
+        <td><%= render 'public/impressions/show_rate', impression: impression %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

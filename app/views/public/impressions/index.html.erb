@@ -1,0 +1,41 @@
+<div class="container">
+  
+  <div class="row mx-auto">
+    <div class="col-4">
+      <h3>感想一覧</h3>
+    </div>
+    <div class="col-2">
+      <%= link_to '投稿する', new_impression_path, class:"btn btn-primary" %>
+    </div>
+  </div>
+  
+  <div class="row">
+    <div class="table col-10">
+      <table>
+        <thead>
+          <tr>
+            <th>投稿者</th>
+            <th>ゲームタイトル</th>
+            <th>感想本文</th>
+            <th>評価</th>
+            <th></th>
+            <th>コメント数</th>
+          </tr>
+        </thead>
+      <% @impressions.each do |impression| %>
+        <tbody>
+          <tr>
+            <td><%= link_to impression.customer.user_name,customer_path(impression.customer_id) %></td>
+            <td class="col-2"><%= impression.title %></td>
+            <td class="col-4"><%= impression.body %></td>
+            <td><%= render 'star_rate', impression: impression %></td>
+            <td><%= link_to "show more", impression_path(impression.id) %></td>
+            <td><%= link_to "#{impression.comments.count}コメント", impression_path(impression.id) %></td>
+          </tr>
+        </tbody>
+      <% end %>
+      </table>
+    </div>
+  </div>
+  <%= paginate @impressions %>
+</div>
