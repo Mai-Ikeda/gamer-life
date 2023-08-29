@@ -1,0 +1,32 @@
+<table class="table">
+  <thead>
+    <tr>
+      <th>ユーザーネーム</th>
+      <th>好きなゲーム</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% customers.each do |customer| %>
+      <tr>
+        <td><%= link_to customer.user_name,customer, class: "customer_#{customer.id}" %></td>
+        <td><%= customer.like_game %></td>
+        <td>フォロー数: <%= customer.followings.count %></td>
+        <td>フォロワー数: <%= customer.followers.count %> </td>
+        <td>
+          <% if current_customer != customer %>
+            <% if current_customer.following?(customer) %>
+              <%= link_to "フォロー外す", customer_relationships_path(customer.id), method: :delete %>
+            <% else %>
+              <%= link_to "フォローする", customer_relationships_path(customer.id), method: :post %>
+            <% end %>
+          <% end %>
+        </td>
+        <td><%= link_to 'show', customer, class: "customer_#{customer.id}" %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

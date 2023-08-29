@@ -1,0 +1,51 @@
+<div class="container">
+  <div class="row">
+    <div class="table mx-auto">
+      <h4>感想詳細</h4>
+      <table>
+        <tbody>
+          <tr>
+            <td class="col-2">タイトル</td>
+            <td class="col-6"><%= @impression.title %></td>
+          </tr>
+          <tr>
+            <td>本文</td>
+            <td><%= @impression.body %></td>
+          </tr>
+          <tr>
+            <td>評価</td>
+            <td><%= render 'show_rate', impression: @impression %></td>
+          </tr>
+          <tr>
+            <td>投稿者</td>
+            <td><%= @impression.customer.user_name %></td>
+          </tr>
+        </tbody>
+      </table>
+      <%= link_to '編集する', edit_impression_path(@impression), class:"btn btn-success" %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="table mx-auto">
+      <h4>コメント</h4>
+      <table>
+        <thead>
+          <tr>
+            <th class="col-2">投稿者</th>
+            <th class="col-4">コメント</th>
+            <th class="col-2">投稿日</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @impression.comments.each do |comment| %>
+          <tr>
+            <td><%= comment.customer.user_name %></td>
+            <td><%= comment.post_comment %></td>
+            <td><%= comment.created_at.strftime('%Y/%m/%d') %></td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

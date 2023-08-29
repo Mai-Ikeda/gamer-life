@@ -1,0 +1,28 @@
+<div class="container">
+  <div class="row">
+    <div class="table col-10 mx-auto">
+      <h3>会員一覧</h3>
+      <table>
+        <thead>
+          <tr>
+            <th class="col-2">ユーザーネーム</th>
+            <th class="col-2">好きなゲーム</th>
+            <th class="col-2">投稿数</th>
+            <th class="col-2"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @customers.each do |customer| %>
+          <tr>
+            <td><%= customer.user_name %></td>
+            <td><%= customer.like_game %></td>
+            <td><%= customer.impressions.count %></td>
+            <td><%= link_to 'show more', admin_customer_path(customer), class: "btn btn-primary" %></td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <%= paginate @customers %>
+</div>
